@@ -19,14 +19,14 @@ class Checkout extends Component{
     handleClick= () => {
         this.props.dispatch({ 
             type: 'ADD_ORDER', 
-            payload: this.props.checkoutList
+            payload: this.props.newOrderReducer
         })
     }
 
     render(){
-        let itemList = this.props.reduxState.checkoutList.map(item => {
+        let itemList = this.props.reduxState.newOrderReducer.map(item => {
             return (
-                <CheckItem key={item.id} item={item}/>
+                <CheckItem key={item.id} item={item} />
             )
         })
         
@@ -42,7 +42,7 @@ class Checkout extends Component{
                         {itemList}
                     </tbody>
                 </table>
-                {this.props.reduxState.checkoutList.totalCost}
+                <p>{JSON.stringify(this.props.reduxState.newOrderReducer)}</p>
                 <button onClick={this.handleClick}>Check Out</button>
             </div>
         )

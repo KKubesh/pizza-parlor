@@ -7,42 +7,54 @@ const mapStateToProps = reduxState => ({
 });
 
 class Menu extends Component{
-// server request for menu item    
+    state={
+        newOrder: {
+            //need this being sent to server individually
+            id: '',
+            name: '',
+            description: '',
+            cost: ''
+        }
+    }
+    
+// server request for menu item   
  componentDidMount() {
      this.props.dispatch({
          type: 'GET_MENU'
      })
  }
  //post request for order details
- addNewOrder() {
+ addNewOrder = (order) => {
+    //  console.log(this.state.newOrder)
      this.props.dispatch({
-         type: 'ADD_ORDER',
+         type: 'NEW_ORDER',
          payload: this.state.newOrder
      })
  }
+//  handleClick = () => {
+//      console.log('in delete button');
+
+//  }
+
 
 
 
     render(){
         let menu = this.props.reduxState.menuReducer.map((pizza) => {
-            return <p key= {pizza.id}>{pizza.name}{pizza.description}{pizza.cost}</p>
-        })
+            return <p key= {pizza.id}>{pizza.name}{pizza.description}{pizza.cost}
+            <button Onclick="this.handleClick">-</button><button Onclick="this.handleClickAdd">+</button></p>
+        });
         return (
             <div>
             <h2> Menu</h2>
             {menu}
+            <button onClick={this.addNewOrder}>Add order</button>
             {/* <pre>{JSON.stringify(this.state)}</pre>  */}
             </div>
         )
 
     }
 }
-// "pizza" ("name", "description", "cost")
-// VALUES ('Splat of Marinara', 'Cheeseless pizza with marinara, garlic and red peppers.', 12.99),
-// ('Onamonapizza', 'Cheese, BBQ sauce and artichokes.', 14.99),
-// ('Pepperoni', 'Classic pizza with cheese and pepperoni. Baked with a traditional crust in our brick oven.', 14.99),
-// ('Over the Rainbow', 'One ingredient of each color: pepperoni, doritos, pineapple, olives, cheese, peppers and onion.', 19.99),
-// ('Chinese Firedragon', 'Pepperoni, pineapple and banana peppers.', 15.99),
-// ('Bad Date', 'Garlic, Onion and Pepperoni.', 24.99
+
 
 export default connect(mapStateToProps)(Menu);

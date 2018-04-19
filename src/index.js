@@ -20,33 +20,61 @@ import {
 } from 'redux-saga/effects';
 import axios from 'axios';
 
-//sagas
+//----------sagas------------
 const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
     console.log('root saga loaded');
     yield takeEvery('GET_MENU', getMenuSaga);
-
+    yield takeEvery('ADD_ORDER', addOrderSaga);
 }
+
+//api request to server for menulist
+//sets it in menureducer state
 function* getMenuSaga(action){
     try{
         console.log('in getMenuSaga')
+        const pizzaMenu = yield call(axios.get, '/api/pizza');
+        yield put({
+            type: 'MENU_LIST',
+            payload: pizzaMenu.data
+        })
     }catch(error){
         console.log('an error in getMenuSaga ', error);
     }
 }
+//add api server route
+function* addOrderSaga(action){
+    try{
+        console.log('in addOrder saga');
+        yield call(axios.post, '/api/pizza', action.payload)
+    }catch(error){
+        console.log('an error in addOrderSaga');
+    }
+}
 
-//reducers
+//------reducers-------
+//keeps track of orders
 const orderReducer = (state=[], action)=>{
     console.log('order reducer loaded');
     return state
+}
+//sets state to the menu list
+const menuReducer = (state=[], action)=>{
+    switch(action.type){
+        case 'MENU_LIST':
+            return action.payload;
+        default: 
+            return state;
+    }
 }
 
 
 //store
 const store = createStore(
     combineReducers({
-        orderReducer
+        orderReducer,
+        menuReducer
     }),
     applyMiddleware(sagaMiddleware),
     applyMiddleware(logger)

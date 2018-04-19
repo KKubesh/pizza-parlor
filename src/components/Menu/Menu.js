@@ -7,21 +7,31 @@ const mapStateToProps = reduxState => ({
 });
 
 class Menu extends Component{
+// server request for menu item    
  componentDidMount() {
      this.props.dispatch({
          type: 'GET_MENU'
      })
  }
+ //post request for order details
+ addNewOrder() {
+     this.props.dispatch({
+         type: 'ADD_ORDER',
+         payload: this.state.newOrder
+     })
+ }
+
 
 
     render(){
-        let menu = this.props.reduxState.menu.map((pizza) => {
+        let menu = this.props.reduxState.menuReducer.map((pizza) => {
             return <p key= {pizza.id}>{pizza.name}{pizza.description}{pizza.cost}</p>
         })
         return (
             <div>
             <h2> Menu</h2>
             {menu}
+            {/* <pre>{JSON.stringify(this.state)}</pre>  */}
             </div>
         )
 

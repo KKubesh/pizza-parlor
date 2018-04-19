@@ -27,6 +27,7 @@ function* rootSaga() {
     console.log('root saga loaded');
     yield takeEvery('GET_MENU', getMenuSaga);
     yield takeEvery('ADD_ORDER', addOrderSaga);
+    yield takeEvery('GET_ORDER', getListOrderSaga);
 }
 
 //api request to server for menulist
@@ -53,11 +54,25 @@ function* addOrderSaga(action){
     }
 }
 
+//get orderList saga
+function* getListOrderSaga(action){
+    const orderList = yield call(axios.get, 'api/pizza/order')
+    yield put({
+        type: 'ORDER_LIST',
+        payload: orderList.data
+    })
+}
+
 //------reducers-------
 //keeps track of orders
-const orderReducer = (state=[], action)=>{
+const orderList = (state=[], action)=>{
     console.log('order reducer loaded');
-    return state
+    switch(action.state){
+        case 'ORDER_LIST':
+            return action.payload;
+        default: 
+            return state;
+    }
 }
 //sets state to the menu list
 const menuReducer = (state=[], action)=>{
@@ -73,7 +88,7 @@ const menuReducer = (state=[], action)=>{
 //store
 const store = createStore(
     combineReducers({
-        orderReducer,
+        orderList,
         menuReducer
     }),
     applyMiddleware(sagaMiddleware),

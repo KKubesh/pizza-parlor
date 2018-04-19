@@ -1,11 +1,19 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import OrderItem from '../OrderItem/OrderItem'
 
 const mapStateToProps = reduxState => ({
     reduxState,
 });
 
 class Order extends Component{
+
+    componentDidMount() {
+        // use component did mount to dispatch an action to request the plantList from the API
+        this.props.dispatch({
+            type: 'ORDER_LIST'
+        })
+    }
 
     render(){
         let orders = this.props.reduxState.orderList.map(order => {

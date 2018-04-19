@@ -1,18 +1,12 @@
 import React, {Component} from 'react';
 
 
-class Order extends Component{
+class OrderItem extends Component{
 
     render(){
-        let orders = this.props.reduxState.pizzalist.map(order => {
-            return (
-                <OrderItem key={order.id} order={order}/>
-            )
-        })
-        
         return(
             <div>
-                 <tr><th>Name</th><th>Time Order Placed</th><th>Cost</th></tr>
+                 <tr><th>{this.props.order.name}</th><th>{this.props.order.time}</th><th>{this.props.order.cost}</th></tr>
             </div>
         )
     }

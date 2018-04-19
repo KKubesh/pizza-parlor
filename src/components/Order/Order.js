@@ -14,7 +14,7 @@ class Order extends Component{
             type: 'ORDER_LIST'
         })
     }
-
+// What are we doing with action payload once we get it from ORDER_LIST
     render(){
         let orders = this.props.reduxState.orderList.map(order => {
             return (

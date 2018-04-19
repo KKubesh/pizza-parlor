@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+import Nav from '../Nav/Nav'
+
 
 class App extends Component {
   render() {
@@ -9,6 +11,7 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Prime Pizza</h1>
         </header>
+            <Nav  />
         <br/>
         <p>Pizza is great.</p>
       </div>

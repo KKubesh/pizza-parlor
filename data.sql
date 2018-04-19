@@ -14,7 +14,8 @@ CREATE TABLE "pizza" (
 CREATE TABLE "order" (
   "id" serial primary key,
   "customer_name" varchar(120),
-  "order_total" numeric
+  "order_total" numeric,
+  "time_of_order" numeric 
 );
 
 -- Pizzas we make
@@ -27,5 +28,5 @@ VALUES ('Splat of Marinara', 'Cheeseless pizza with marinara, garlic and red pep
 ('Bad Date', 'Garlic, Onion and Pepperoni.', 24.99);
 
 -- Sample order
-INSERT INTO "order" ("customer_name", "order_total")
-VALUES ('Chris', 39.97);
+INSERT INTO "order" ("customer_name", "order_total", "time_of_order")
+VALUES ('Chris', 39.97, '1100');

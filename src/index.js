@@ -88,6 +88,10 @@ const newOrderReducer = (state=[{id: 1, name: 'blah', quantity: 2, cost: 19.99}]
     switch(action.type){
         case 'NEW_ORDER':
             return [...state, action.type];
+        case 'REMOVE_ORDER':
+            return state.filter((order)=>{
+                return order.id != action.payload.id
+            })
         default:
             return state;
     }

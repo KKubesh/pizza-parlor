@@ -16,7 +16,7 @@ class Order extends Component{
     }
 // What are we doing with action payload once we get it from ORDER_LIST
     render(){
-        let orders = this.props.reduxState.orderList.map(order => {
+        let orders = this.props.reduxState.newOrderReducer.map(order => {
             return (
                 <OrderItem key={order.id} order={order}/>
             )

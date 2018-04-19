@@ -84,7 +84,7 @@ const menuReducer = (state=[], action)=>{
     }
 }
 
-const newOrderReducer = (state=[], action)=>{
+const newOrderReducer = (state=[{id: 1, name: 'blah', quantity: 2, cost: 19.99}], action)=>{
     switch(action.type){
         case 'NEW_ORDER':
             return [...state, action.type];

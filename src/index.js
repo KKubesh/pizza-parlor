@@ -48,7 +48,7 @@ function* getMenuSaga(action){
 function* addOrderSaga(action){
     try{
         console.log('in addOrder saga');
-        yield call(axios.post, '/api/pizza', action.payload)
+        yield call(axios.post, '/api/pizza/order', action.payload)
     }catch(error){
         console.log('an error in addOrderSaga');
     }
@@ -84,12 +84,22 @@ const menuReducer = (state=[], action)=>{
     }
 }
 
+const newOrderReducer = (state=[], action)=>{
+    switch(action.type){
+        case 'NEW_ORDER':
+            return [...state, action.type];
+        default:
+            return state;
+    }
+}
+
 
 //store
 const store = createStore(
     combineReducers({
         orderList,
-        menuReducer
+        menuReducer,
+        newOrderReducer
     }),
     applyMiddleware(sagaMiddleware),
     applyMiddleware(logger)

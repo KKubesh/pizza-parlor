@@ -9,6 +9,14 @@ const mapStateToProps = reduxState => ({
 
 
 class Checkout extends Component{
+    constructor(props) {
+        super(props)
+        this.state = {
+            customer_name: ''
+        }
+    }
+    
+
     componentDidMount() {
         // use component did mount to dispatch an action to request the checkoutList from the API
         this.props.dispatch({
@@ -19,7 +27,16 @@ class Checkout extends Component{
     handleClick= () => {
         this.props.dispatch({ 
             type: 'ADD_ORDER', 
-            payload: this.props.newOrderReducer
+            payload: {
+            pizzaOrder: this.props.reduxState.newOrderReducer,
+            customer_name: this.state.customer_name
+            }
+        })
+    }
+
+    handleChange = event => {
+        this.setState({
+            customer_name: event.target.value
         })
     }
 
@@ -33,7 +50,8 @@ class Checkout extends Component{
         return(
             <div>
                 <h2>Checkout</h2>
-                <input type="text" placeholder="Your Name" />
+                <input type="text" placeholder="Your Name" onChange={this.handleChange}/>
+                <p>{this.state.customer_name}</p>
                 <table>
                     <thead>
                         <tr><th>Name</th><th>Quantity</th><th>Cost</th></tr>
@@ -42,7 +60,6 @@ class Checkout extends Component{
                         {itemList}
                     </tbody>
                 </table>
-                <p>{JSON.stringify(this.props.reduxState.newOrderReducer)}</p>
                 <button onClick={this.handleClick}>Check Out</button>
             </div>
         )

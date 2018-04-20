@@ -97,7 +97,7 @@ const menuReducer = (state=[], action)=>{
 const newOrderReducer = (state = [{ id: 1, name: 'blah', description: 'asdf', cost: 19.99 }, { id: 1, name: 'blah', description: 'asdf', cost: 19.99 }], action)=>{
     switch(action.type){
         case 'NEW_ORDER':
-            return [...state, action.type];
+            return [...state, action.payload];
         case 'REMOVE_ORDER':
             return state.filter((order)=>{
                 return order.id !== action.payload.id

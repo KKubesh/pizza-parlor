@@ -5,13 +5,22 @@ import {
     connect
 } from 'react-redux';
 import Pizza from './Pizza/Pizza';
+import OrderTotal from '../OrderTotal/OrderTotal';
 
 
 const mapStateToProps = reduxState => ({
     reduxState
 });
 
+
 class Menu extends Component {
+ // server request for menu item   
+ componentDidMount() {
+    this.props.dispatch({
+        type: 'GET_MENU'
+    })
+}
+
     render() {
         console.log(this.props.reduxState)
         let menu = this.props.reduxState.menuReducer.map((pizza) => {
@@ -36,7 +45,10 @@ class Menu extends Component {
         });
 
         return ( 
-            menu
+            <div>
+        {menu}
+        <OrderTotal />
+        </div>
         )
     }
 }

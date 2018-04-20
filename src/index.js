@@ -64,8 +64,18 @@ function* getListOrderSaga(action){
 }
 
 //------reducers-------
-//keeps track of orders
-const orderList = (state=[], action)=>{
+//keeps track of orders for checout
+const orderList = (state = [{
+        id: 1,
+        name: 'blah',
+        description: 'a;lskdfjla;s',
+        cost: 19.99
+    }, {
+        id: 2,
+        name: 'blahasdf',
+        description: 'a;lskdfasdfjla;s',
+        cost: 19.99
+    }], action) => {
     console.log('order reducer loaded');
     switch(action.state){
         case 'ORDER_LIST':
@@ -84,13 +94,13 @@ const menuReducer = (state=[], action)=>{
     }
 }
 
-const newOrderReducer = (state=[{id: 1, name: 'blah', quantity: 2, cost: 19.99}], action)=>{
+const newOrderReducer = (state=[{id: 1, name: 'blah', description: 'asdf', cost: 19.99}], action)=>{
     switch(action.type){
         case 'NEW_ORDER':
             return [...state, action.type];
         case 'REMOVE_ORDER':
             return state.filter((order)=>{
-                return order.id != action.payload.id
+                return order.id !== action.payload.id
             })
         default:
             return state;

@@ -29,12 +29,11 @@ router.get('/order', (req, res) => {
 }); //end GET order
 
 
-// POST order
 router.post('/order', (req, res) => {
     let order = req.body;
     const queryText = `INSERT INTO "order" ("customer_name", "order_total", "time_of_order")
-                        VALUES ($1, $2, $3)`;
-    pool.query(queryText, [order.customer_name, order.order_total, order.time_of_order])
+                        VALUES ($1, $2, current_timestamp)`;
+    pool.query(queryText, [order.customer_name, order.order_total])
     .then((result) => {
         console.log(result.rows);
         res.sendStatus(201);
@@ -43,6 +42,10 @@ router.post('/order', (req, res) => {
         res.sendStatus(500);
     })
 }) // end POST order
+
+
+
+
 
 
 

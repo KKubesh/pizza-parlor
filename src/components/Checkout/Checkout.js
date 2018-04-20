@@ -55,13 +55,6 @@ class Checkout extends Component{
                 <CheckItem key={item.id} item={item} />
             )
         })
-
-        let orderTotal = this.props.reduxState.newOrderReducer.reduce( 
-            (accumulator, pizzaCost) => {
-            return (
-                accumulator + pizzaCost.cost
-            )
-        },0)
         
         return(
             <div>

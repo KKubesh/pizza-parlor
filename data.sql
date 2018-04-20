@@ -11,12 +11,19 @@ CREATE TABLE "pizza" (
 );
 
 -- Table to store the orders
+-- CREATE TABLE "order" (
+--   "id" serial primary key,
+--   "customer_name" varchar(120),
+--   "order_total" numeric,
+--   "time_of_order" numeric 
+-- );
+
 CREATE TABLE "order" (
   "id" serial primary key,
   "customer_name" varchar(120),
   "order_total" numeric,
-  "time_of_order" numeric 
-);
+  "time_of_order" timestamp default current_timestamp
+  );
 
 -- Pizzas we make
 INSERT INTO "pizza" ("name", "description", "cost")
@@ -28,5 +35,8 @@ VALUES ('Splat of Marinara', 'Cheeseless pizza with marinara, garlic and red pep
 ('Bad Date', 'Garlic, Onion and Pepperoni.', 24.99);
 
 -- Sample order
+-- INSERT INTO "order" ("customer_name", "order_total", "time_of_order")
+-- VALUES ('Chris', 39.97, '1100');
+
 INSERT INTO "order" ("customer_name", "order_total", "time_of_order")
-VALUES ('Chris', 39.97, '1100');
+VALUES ('Chris', 39.97, current_timestamp);

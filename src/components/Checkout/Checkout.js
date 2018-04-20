@@ -51,7 +51,6 @@ class Checkout extends Component{
             <div>
                 <h2>Checkout</h2>
                 <input type="text" placeholder="Your Name" onChange={this.handleChange}/>
-                <p>{this.state.customer_name}</p>
                 <table>
                     <thead>
                         <tr><th>Name</th><th>Quantity</th><th>Cost</th></tr>

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import CheckItem from '../CheckItem/CheckItem.js'
 
 const mapStateToProps = reduxState => ({
     reduxState,
@@ -16,6 +15,8 @@ class OrderTotal extends Component{
                 accumulator + pizzaCost.cost
             )
         },0)
+
+        this.props.getTotal(orderTotal)
         
         return(
             <div>

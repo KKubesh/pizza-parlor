@@ -13,7 +13,8 @@ class Checkout extends Component{
     constructor(props) {
         super(props)
         this.state = {
-            customer_name: ''
+            customer_name: '',
+            total: {}
         }
     }
     
@@ -30,8 +31,15 @@ class Checkout extends Component{
             type: 'ADD_ORDER', 
             payload: {
             pizzaOrder: this.props.reduxState.newOrderReducer,
-            customer_name: this.state.customer_name
+            customer_name: this.state.customer_name,
+            order_total: this.state.order_total
             }
+        })
+    }
+
+    getTotal= (total) => {
+        this.setState({
+            order_total: total
         })
     }
 
@@ -67,7 +75,7 @@ class Checkout extends Component{
                         {itemList}
                     </tbody>
                 </table>
-                <OrderTotal />
+                <OrderTotal getTotal={this.getTotal}/>
                 <button onClick={this.handleClick}>Check Out</button>
             </div>
         )

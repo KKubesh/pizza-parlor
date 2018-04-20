@@ -7,7 +7,11 @@ const mapStateToProps = reduxState => ({
 
 
 
+
 class OrderTotal extends Component{
+    componentDidMount() {
+
+    }
     render(){
         let orderTotal = this.props.reduxState.newOrderReducer.reduce( 
             (accumulator, pizzaCost) => {
@@ -16,7 +20,7 @@ class OrderTotal extends Component{
             )
         },0)
 
-        this.props.getTotal(orderTotal)
+        //this.props.getTotal(orderTotal)
         
         return(
             <div>

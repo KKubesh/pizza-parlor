@@ -27,12 +27,18 @@ class Checkout extends Component{
     }
 
     handleClick= () => {
+        let orderTotal = this.props.reduxState.newOrderReducer.reduce( 
+            (accumulator, pizzaCost) => {
+            return (
+                accumulator + pizzaCost.cost
+            )
+        },0)
         this.props.dispatch({ 
             type: 'ADD_ORDER', 
             payload: {
             pizzaOrder: this.props.reduxState.newOrderReducer,
             customer_name: this.state.customer_name,
-            order_total: this.state.order_total
+            order_total: orderTotal
             }
         })
     }
@@ -55,13 +61,6 @@ class Checkout extends Component{
                 <CheckItem key={item.id} item={item} />
             )
         })
-
-        let orderTotal = this.props.reduxState.newOrderReducer.reduce( 
-            (accumulator, pizzaCost) => {
-            return (
-                accumulator + pizzaCost.cost
-            )
-        },0)
         
         return(
             <div>

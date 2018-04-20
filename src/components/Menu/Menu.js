@@ -14,12 +14,24 @@ const mapStateToProps = reduxState => ({
 
 
 class Menu extends Component {
+// constructor(props) {
+//     super(props)
+//     this.state = {
+//         total: ''
+//     }
+// }
  // server request for menu item   
  componentDidMount() {
     this.props.dispatch({
         type: 'GET_MENU'
     })
 }
+
+// getTotal= (total) => {
+//     this.setState({
+//         order_total: total
+//     })
+// }
 
     render() {
         console.log(this.props.reduxState)
@@ -47,7 +59,7 @@ class Menu extends Component {
         return ( 
             <div>
         {menu}
-        <OrderTotal />
+        {/* <OrderTotal /> */}
         </div>
         )
     }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import CheckItem from '../CheckItem/CheckItem.js'
+import OrderTotal from '../OrderTotal/OrderTotal.js'
 
 const mapStateToProps = reduxState => ({
     reduxState,
@@ -46,6 +47,13 @@ class Checkout extends Component{
                 <CheckItem key={item.id} item={item} />
             )
         })
+
+        let orderTotal = this.props.reduxState.newOrderReducer.reduce( 
+            (accumulator, pizzaCost) => {
+            return (
+                accumulator + pizzaCost.cost
+            )
+        },0)
         
         return(
             <div>
@@ -59,6 +67,7 @@ class Checkout extends Component{
                         {itemList}
                     </tbody>
                 </table>
+                <OrderTotal />
                 <button onClick={this.handleClick}>Check Out</button>
             </div>
         )
